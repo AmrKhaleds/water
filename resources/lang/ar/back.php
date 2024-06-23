@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'price_proposal' => 'عرض سعر',
     'printing_models' => 'نماذج الطباعة',
     'paper_loading_cost' => 'ثمن تخليص الورق و التحميل',
     'update' => 'تحديث',

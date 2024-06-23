@@ -4,6 +4,7 @@ use App\Http\Controllers\PrintingModelController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SudanSalesController;
+use App\Http\Controllers\PriceProposalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +122,15 @@ Route::group(
 
                 // Printing Models
                 Route::resource('/printing_models', PrintingModelController::class);
+                // Price Proposal
+                Route::get('/price-proposal', [PriceProposalController::class, 'index'])->name('price_proposal.index');
+                Route::get('/price-proposal/create', [PriceProposalController::class, 'create'])->name('price_proposal.create');
+                Route::get('/price-proposal/show/{id}', [PriceProposalController::class, 'show'])->name('price_proposal.show');
+                Route::post('/price-proposal/store', [PriceProposalController::class, 'store'])->name('price_proposal.store');
+                Route::get('/price-proposal/edit/{id}', [PriceProposalController::class, 'edit'])->name('price_proposal.edit');
+                Route::put('/price-proposal/update/{id}', [PriceProposalController::class, 'update'])->name('price_proposal.update');
+                Route::post('/price-proposal/arabic_price', [PriceProposalController::class, 'arabic_price'])->name('price_proposal.arabic_price');
+                Route::delete('/price-proposal/destroy/{id}', [PriceProposalController::class, 'destroy'])->name('price_proposal.destroy');
 
                 //        CARS
                 //        Vehicles

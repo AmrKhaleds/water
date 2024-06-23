@@ -156,6 +156,25 @@
                 </div>
             </a>
         </div>
+
+        <div class="col-6 col-sm-6 col-md-4 col-xl-2">
+            <a href="{{ route('price_proposal.index') }}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            {{-- make uil icon for price --}}
+                            <i class="uil-money-withdrawal  custom-color" style="font-size: 55px"></i>
+                            
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <h4 class="mb-1 mt-1">
+                                <span>@lang('back.price_proposal')</span>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="row">
