@@ -1,7 +1,7 @@
 @extends('acp.layout.app')
 
 @section('title')
-    @lang('back.create') @lang('back.printing_models')
+    @lang('back.create') @lang('back.price_proposal')
 @endsection
 @section('css')
     <link href="{{ url('acp/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -11,11 +11,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0">@lang('back.create') @lang('back.printing_models')</h4>
+                <h4 class="mb-0">@lang('back.create') @lang('back.price_proposal')</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">@lang('back.create') @lang('back.printing_models')</li>
-                        <li class="breadcrumb-item ">@lang('back.printing_models')</li>
+                        <li class="breadcrumb-item active">@lang('back.create') @lang('back.price_proposal')</li>
+                        <li class="breadcrumb-item ">@lang('back.price_proposal')</li>
                         <li class="breadcrumb-item">@lang('back.dashborad')</li>
                     </ol>
                 </div>
