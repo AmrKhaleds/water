@@ -55,14 +55,13 @@ class PriceProposalController extends Controller
             ];
         }
 
-        // Store the data
-        PriceProposal::create([
-            'name' => $request->input('name'),
-            'date' => $request->input('date'),
-            'statements' => json_encode($data),
-            'notes' => $request->input('notes'),
-        ]);
-
+        $price_proposal = new PriceProposal;
+        $price_proposal->name = $request->input('name');
+        $price_proposal->date = $request->input('date');
+        $price_proposal->statements = json_encode($data);
+        $price_proposal->notes = $request->input('notes');
+        $price_proposal->save();
+    
         // Redirect or return a response
         Session::flash('msg', __('back.successfully_applied'));
         return redirect()->back();
