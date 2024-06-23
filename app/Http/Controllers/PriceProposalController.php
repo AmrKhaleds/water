@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Alkoumi\LaravelArabicNumbers\Numbers;
+// use Alkoumi\LaravelArabicNumbers\Numbers;
 use App\Models\PriceProposal;
 use Faker\Core\Number;
 use Illuminate\Http\Request;
@@ -23,7 +23,8 @@ class PriceProposalController extends Controller
 
         $statements_collection = collect($statements);
         $total_price = $statements_collection->sum('price');
-        $total_price_in_arabic = Numbers::tafqeetMoney($total_price, 'EGP');
+        // $total_price_in_arabic = Numbers::tafqeetMoney($total_price, 'EGP');
+        $total_price_in_arabic = $total_price;
 
         return view('acp.price_proposal.show', compact('statements', 'price_proposal', 'total_price_in_arabic'));
     }
@@ -78,7 +79,8 @@ class PriceProposalController extends Controller
 
         // Convert the total to Arabic words
         $total = $request->input('total');
-        $convertedTotal = Numbers::tafqeetMoney($total, 'EGP');
+        // $convertedTotal = Numbers::tafqeetMoney($total, 'EGP');
+        $convertedTotal = $total;
 
         // Return the converted total
         return response()->json(['convertedTotal' => $convertedTotal]);
