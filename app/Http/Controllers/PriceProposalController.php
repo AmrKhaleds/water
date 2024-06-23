@@ -64,7 +64,7 @@ class PriceProposalController extends Controller
     
         // Redirect or return a response
         Session::flash('msg', __('back.successfully_applied'));
-        return redirect()->back();
+        return redirect()->route('price_proposal.index');
     }
 
 
