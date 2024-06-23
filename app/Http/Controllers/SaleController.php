@@ -15,7 +15,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
@@ -209,7 +208,7 @@ class SaleController extends Controller
 			}
 		}
 
-		Session::flash('msg', __('back.successfully_saved'));
+		\Session::flash('msg', __('back.successfully_saved'));
 		return Redirect::back();
 	}
 

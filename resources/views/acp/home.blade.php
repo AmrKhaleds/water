@@ -5,6 +5,7 @@
 @endsection
 
 @section('css')
+
 @endsection
 @section('content')
     <div class="row ">
@@ -446,7 +447,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('vehicles.index') }}">
+            <a href="{{route('vehicles.index')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -463,7 +464,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('maintenances.index') }}">
+            <a href="{{route('maintenances.index')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -488,7 +489,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('bookings.index') }}">
+            <a href="{{route('bookings.index')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -505,7 +506,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('booking.freezers.index') }}">
+            <a href="{{route('booking.freezers.index')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -519,7 +520,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div>        
     </div>
 
     <div class="row">
@@ -530,7 +531,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('report.store') }}">
+            <a href="{{route('report.store')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -544,7 +545,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div>        
     </div>
 
     <div class="row">
@@ -555,7 +556,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('setting_km.create') }}">
+            <a href="{{route('setting_km.create')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -572,7 +573,7 @@
         </div>
 
         <div class="col-6 col-sm-6 col-md-4 col-xl-2">
-            <a href="{{ route('setting.create') }}">
+            <a href="{{route('setting.create')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
@@ -586,7 +587,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div>        
     </div>
 @endsection
 @section('js')

@@ -26,7 +26,6 @@ class SudanSale extends Model
         'product_id',
         'goods_received_date',
         'goods_received',
-        'paper_loading_cost'
     ];
 
     public function product()

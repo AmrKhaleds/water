@@ -61,7 +61,7 @@ class PurchaseController extends Controller
         ]);
 	    $lastBill = Bill::where('type', 'Purchase')->latest('id')->first();
         $finalrequest = $request->all();
-	    $finalrequest ['ref'] =  is_null($lastBill) ? 'PR_' . date('Ymdhi') . 1 : 'PR_' . date('Ymdhi') . $lastBill->id + 1;
+	    $finalrequest ['ref'] =  is_null($lastBill) ? 'PR_' . date('Ymdhi') . 1 : 'PR_' . date('Ymdhi') . ($lastBill->id + 1);
 
         $finalrequest ['created_by'] = Auth::user()->id;
         $finalrequest ['type'] = 'Purchase';

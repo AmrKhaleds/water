@@ -1,0 +1,51 @@
+[27-Feb-2022 18:54:25 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.28. in /home/clicwtgo/water.h-mokhtar.com/vendor/composer/platform_check.php on line 24
+[12-Mar-2022 22:29:13 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.28. in /home/clicwtgo/water.h-mokhtar.com/vendor/composer/platform_check.php on line 24
+[19-Apr-2022 15:07:38 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.28. in /home/clicwtgo/water.h-mokhtar.com/vendor/composer/platform_check.php on line 24
+[19-Apr-2022 17:09:19 Africa/Cairo] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/clicwtgo/water.h-mokhtar.com/vendor/psr/log/src/LoggerInterface.php on line 30
+[19-Apr-2022 17:09:19 Africa/Cairo] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[19-Apr-2022 17:09:19 Africa/Cairo] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/clicwtgo/water.h-mokhtar.com/vendor/psr/log/src/LoggerInterface.php on line 30
+[19-Apr-2022 17:09:19 Africa/Cairo] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[19-Apr-2022 17:13:38 Africa/Cairo] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/clicwtgo/water.h-mokhtar.com/vendor/psr/log/src/LoggerInterface.php on line 30
+[19-Apr-2022 17:13:38 Africa/Cairo] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[19-Apr-2022 17:13:38 Africa/Cairo] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/clicwtgo/water.h-mokhtar.com/vendor/psr/log/src/LoggerInterface.php on line 30
+[19-Apr-2022 17:13:38 Africa/Cairo] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[19-Apr-2022 17:17:32 Africa/Cairo] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/clicwtgo/water.h-mokhtar.com/vendor/psr/log/src/LoggerInterface.php on line 30
+[19-Apr-2022 17:17:32 Africa/Cairo] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[19-Apr-2022 17:17:32 Africa/Cairo] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/clicwtgo/water.h-mokhtar.com/vendor/psr/log/src/LoggerInterface.php on line 30
+[19-Apr-2022 17:17:32 Africa/Cairo] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[02-Aug-2022 06:39:05 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 06:39:05 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bookxyzd/water.khater.xyz/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:49:38 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:49:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bookxyzd/water.khater.xyz/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:49:52 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:49:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bookxyzd/water.khater.xyz/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:49:54 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:49:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bookxyzd/water.khater.xyz/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:53:06 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:53:06 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bookxyzd/water.khater.xyz/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:53:15 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 13:53:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bookxyzd/water.khater.xyz/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 15:20:19 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 15:20:19 UTC] PHP Fatal error:  require(): Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 15:20:33 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 15:20:33 UTC] PHP Fatal error:  require(): Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 15:20:40 UTC] PHP Warning:  require(/home/bookxyzd/water.khater.xyz/../vendor/autoload.php): failed to open stream: No such file or directory in /home/bookxyzd/water.khater.xyz/index.php on line 34
+[02-Aug-2022 15:20:40 UTC] PHP Fatal error:  require(): Failed opening required '/home/bookxyzd/water.khater.xyz/../vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/bookxyzd/water.khater.xyz/index.php on line 34
