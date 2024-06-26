@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Alkoumi\LaravelArabicNumbers\Numbers;
 use App\Models\PriceProposal;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Faker\Core\Number;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Knp\Snappy\Pdf;
 
 class PriceProposalController extends Controller
 {
@@ -25,7 +27,7 @@ class PriceProposalController extends Controller
         $total_price = $statements_collection->sum('price');
         $total_price_in_arabic = Numbers::tafqeetMoney($total_price, 'EGP');
 
-        return view('acp.price_proposal.show', compact('statements', 'price_proposal', 'total_price_in_arabic'));
+        return view('acp.price_proposal.show', compact('statements', 'price_proposal', 'total_price', 'total_price_in_arabic'));
     }
 
     public function create()
@@ -36,51 +38,121 @@ class PriceProposalController extends Controller
     public function store(Request $request)
     {
         // Validate the request
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'date' => 'required|date',
-            "statement"    => "required|array",
-            "statement.*"  => "required|string|distinct",
+            'statement' => 'required|array',
+            'statement.*' => 'required|string|distinct',
             'price' => 'required|array',
-            "price.*"  => "required|string|distinct",
+            'price.*' => 'required|string|distinct',
             'notes' => 'nullable|string',
         ]);
 
         // Combine statements and prices into a single JSON object
-        $data = [];
-        foreach ($request->input('statement') as $index => $statement) {
-            $data[] = [
+        $data = collect($validatedData['statement'])->map(function ($statement, $index) use ($validatedData) {
+            return [
                 'statement' => $statement,
-                'price' => $request->input('price')[$index]
+                'price' => $validatedData['price'][$index],
             ];
-        }
+        })->toArray();
 
-        $price_proposal = new PriceProposal;
-        $price_proposal->name = $request->input('name');
-        $price_proposal->date = $request->input('date');
-        $price_proposal->statements = json_encode($data);
-        $price_proposal->notes = $request->input('notes');
-        $price_proposal->save();
-    
+        // Create and save a new PriceProposal
+        $priceProposal = PriceProposal::create([
+            'name' => $validatedData['name'],
+            'date' => $validatedData['date'],
+            'statements' => json_encode($data),
+            'notes' => $validatedData['notes'] ?? null,
+        ]);
+
+        // Calculate total price and convert it to Arabic
+        $totalPrice = collect($data)->sum('price');
+        $totalPriceInArabic = Numbers::tafqeetMoney($totalPrice, 'EGP');
+
+        // Prepare data for PDF generation
+        $pdfData = [
+            'statements' => $data,
+            'price_proposal' => $priceProposal,
+            'total_price_in_arabic' => $totalPriceInArabic,
+        ];
+
+        // Generate and save the PDF
+        $pdf = SnappyPdf::loadView('acp.price_proposal.show', $pdfData)
+            ->setPaper('a4')
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 0);
+        $pdf->save('uploads/price-proposal/' . $priceProposal->id . '.pdf');
+
         // Redirect or return a response
         Session::flash('msg', __('back.successfully_applied'));
         return redirect()->route('price_proposal.index');
     }
 
+    public function edit($id)
+    {
+        $price_proposal = PriceProposal::findOrFail($id);
+        $statements = json_decode($price_proposal->statements, true);
+        return view('acp.price_proposal.edit', compact('price_proposal', 'statements'));
+    }
 
-    public function arabic_price(Request $request)
+    public function update(Request $request, $id)
     {
         // Validate the request
-        $request->validate([
-            'total' => 'required|numeric',
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'date' => 'required|date',
+            'statement' => 'required|array',
+            'statement.*' => 'required|string|distinct',
+            'price' => 'required|array',
+            'price.*' => 'required|string|distinct',
+            'notes' => 'nullable|string',
         ]);
 
-        // Convert the total to Arabic words
-        $total = $request->input('total');
-        $convertedTotal = Numbers::tafqeetMoney($total, 'EGP');
+        // Combine statements and prices into a single JSON object
+        $data = collect($request->statement)->map(function ($statement, $index) use ($request) {
+            return [
+                'statement' => $statement,
+                'price' => $request->price[$index],
+            ];
+        })->toArray();
 
-        // Return the converted total
-        return response()->json(['convertedTotal' => $convertedTotal]);
+        // Find the existing PriceProposal
+        $priceProposal = PriceProposal::findOrFail($id);
+
+        // Remove the old PDF
+        $pdfPath = 'uploads/price-proposal/' . $priceProposal->id . '.pdf';
+        if (file_exists($pdfPath)) {
+            unlink($pdfPath);
+        }
+
+        // Update the PriceProposal
+        $priceProposal->name = $request->name;
+        $priceProposal->date = $request->date;
+        $priceProposal->statements = json_encode($data);
+        $priceProposal->notes = $request->notes ?? null;
+        $priceProposal->save();
+
+        // Calculate total price and convert it to Arabic
+        $totalPrice = collect($data)->sum('price');
+        $totalPriceInArabic = Numbers::tafqeetMoney($totalPrice, 'EGP');
+
+        // Prepare data for PDF generation
+        $pdfData = [
+            'statements' => $data,
+            'price_proposal' => $priceProposal,
+            'total_price' => $totalPrice,
+            'total_price_in_arabic' => $totalPriceInArabic,
+        ];
+
+        // Generate and save the new PDF
+        $pdf = SnappyPdf::loadView('acp.price_proposal.show', $pdfData)
+            ->setPaper('a4')
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 0);
+        $pdf->save($pdfPath);
+
+        // Redirect or return a response
+        Session::flash('msg', __('back.successfully_updated'));
+        return redirect()->route('price_proposal.index');
     }
 
     public function destroy($id)
@@ -90,6 +162,20 @@ class PriceProposalController extends Controller
 
         Session::flash('msg', __('back.successfully_deleted'));
         return redirect()->back();
+    }
 
+    public function whatsapp(Request $request)
+    {
+        $request->validate([
+            'whatsapp' => 'required|numeric',
+            'proposal_id' => 'required',
+        ]);
+        $message = "السلام عليكم\nعرض سعر مقدم من شركة فرعون\n------------------- \nلينك عرض السعر:\n";
+        $fileUrl = asset('uploads/price-proposal/' . $request->proposal_id . '.pdf'); // Replace with your actual file URL
+        $message .= $fileUrl . "\n\nكامل الإحترام\nشركة فرعون";
+        $encodedMessage = urlencode($message);
+
+        $whatsappUrl = 'https://wa.me/+2' . $request->whatsapp . '?text=' . $encodedMessage;
+        return view('acp.price_proposal.whatsapp', ['url' => $whatsappUrl]);
     }
 }

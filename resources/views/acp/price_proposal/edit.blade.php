@@ -1,7 +1,7 @@
 @extends('acp.layout.app')
 
 @section('title')
-    @lang('back.create') @lang('back.price_proposal')
+    @lang('back.edit') @lang('back.price_proposal')
 @endsection
 @section('css')
     <link href="{{ url('acp/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -11,11 +11,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0">@lang('back.create') @lang('back.price_proposal')</h4>
+                <h4 class="mb-0">@lang('back.edit') @lang('back.price_proposal')</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">@lang('back.create') @lang('back.price_proposal')</li>
-                        <li class="breadcrumb-item ">@lang('back.price_proposal')</li>
+                        <li class="breadcrumb-item active">@lang('back.edit') @lang('back.price_proposal')</li>
+                        <li class="breadcrumb-item">@lang('back.price_proposal')</li>
                         <li class="breadcrumb-item">@lang('back.dashborad')</li>
                     </ol>
                 </div>
@@ -45,39 +45,58 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <form method="post" action="{{ route('price_proposal.store') }}" enctype="multipart/form-data"
-                        novalidate>
+                    <form method="post" action="{{ route('price_proposal.update', $price_proposal->id) }}"
+                        enctype="multipart/form-data" novalidate>
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="name">@lang('back.name')</label>
-                                <input type="text" class="form-control" id="name" name="name" required placeholder="Enter Price Proposal Name">
+                                <input type="text" class="form-control" id="name" name="name" required
+                                    placeholder="Enter Price Proposal Name" value="{{ $price_proposal->name }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="date">@lang('back.date') </label>
-                                <input type="date" class="form-control" id="date" name="date" required>
+                                <input type="date" class="form-control" id="date" name="date" required
+                                    value="{{ Carbon\Carbon::parse($price_proposal->date)->format('Y-m-d') }}">
                             </div>
                         </div>
                         <div id="statements" class="mt-2">
-                            <div class="row">
-                                <div class="form-group col-5">
-                                    <label for="statement">@lang('back.statement')</label>
-                                    <input type="text" class="form-control" name="statement[]" required placeholder="@lang('back.statement')">
+                            @php
+                                $is_first = true;
+                            @endphp
+                            @foreach ($statements as $statement)
+                                {{-- {{ dd($statement) }} --}}
+                                <div class="row form-row">
+                                    <div class="form-group col-5">
+                                        <label for="statement">@lang('back.statement')</label>
+                                        <input type="text" class="form-control" name="statement[]" required
+                                            placeholder="@lang('back.statement')" value="{{ $statement['statement'] }}">
+                                    </div>
+                                    <div class="form-group col-5">
+                                        <label for="price">@lang('back.price')</label>
+                                        <input type="number" class="form-control" name="price[]" required
+                                            placeholder="@lang('back.price')" value="{{ $statement['price'] }}">
+                                    </div>
+                                    <div class="form-group col-2 d-flex align-items-end">
+                                        @if ($is_first)
+                                            <button type="button"
+                                                class="btn btn-success add-row">@lang('back.create')</button>
+                                            @php
+                                                $is_first = false;
+                                            @endphp
+                                        @else
+                                            <button type="button" class="btn btn-danger remove-row">@lang('back.delete')</button>
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="form-group col-5">
-                                    <label for="price">@lang('back.price')</label>
-                                    <input type="number" class="form-control" name="price[]" required placeholder="@lang('back.price')">
-                                </div>
-                                <div class="form-group col-2 d-flex align-items-end">
-                                    <button type="button" class="btn btn-success add-row">@lang('back.create')</button>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <div id="notes" class="mt-2">
                             <div class="row">
                                 <div class="form-group col-12">
                                     <label for="statement">ملاحظات</label>
-                                    <textarea placeholder="إضافة ملاحظة" name="notes" id=""  rows="6" class="form-control"></textarea>
+                                    <textarea placeholder="إضافة ملاحظة" name="notes" id="" rows="6" class="form-control">{{ $price_proposal->notes }}</textarea>
                                 </div>
                             </div>
                         </div>

@@ -129,14 +129,18 @@
                     @foreach ($statements as $statement)
                         <tr>
                             <td style="width: 80%">{{ $statement['statement'] }}</td>
-                            <td class="price">{{ $statement['price'] }}</td>
+                            <td class="price">{{ number_format($statement['price']) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="1">الإجمالي الكلي</th>
+                        <th colspan="1">الإجمالي الكلي (حروف)</th>
                         <th id="total-price">{{ $total_price_in_arabic }}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="1">الإجمالي الكلي (ارقام)</th>
+                        <th id="total-price">{{ number_format($total_price) }} جنيهًا فقط لا غير</th>
                     </tr>
                 </tfoot>
             </table>

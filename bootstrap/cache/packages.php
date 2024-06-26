@@ -10,6 +10,29 @@
       'Numbers' => 'Alkoumi\\LaravelArabicNumbers\\Numbers',
     ),
   ),
+  'barryvdh/laravel-snappy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\Snappy\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Barryvdh\\Snappy\\Facades\\SnappyPdf',
+      'SnappyImage' => 'Barryvdh\\Snappy\\Facades\\SnappyImage',
+    ),
+  ),
+  'carlos-meneses/laravel-mpdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mccarlosen\\LaravelMpdf\\LaravelMpdfServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Mccarlosen\\LaravelMpdf\\Facades\\LaravelMpdf',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 

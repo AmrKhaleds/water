@@ -55,26 +55,31 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>@lang('back.whatsapp')</th>
                                 <th>@lang('back.print')</th>
                                 <th>@lang('back.name')</th>
                                 <th>@lang('back.date')</th>
                                 <th>@lang('back.action')</th>
                             </tr>
                         </thead>
-
-
                         <tbody>
                             @isset($statements)
                                 @foreach ($statements as $key => $statement)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>
+                                            <a class="dropdown-item" href="#" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#whatsappModal" data-id="{{ $statement->id }}">
+                                                <i class="uil uil-whatsapp-alt" style="font-size: 30px; color: green"></i>
+                                            </a>
+                                        </td>
+                                        <td>
                                             @php
                                                 $url = route('price_proposal.show', $statement->id);
                                             @endphp
                                             <a class="dropdown-item" href="#"
                                                 onclick="printPage('{{ $url }}'); return false;"><i
-                                                    class="text-warning fas fa-print"></i>
+                                                    class="text-warning fas fa-print" style="font-size: 25px;"></i>
                                             </a>
                                         </td>
                                         <td>
@@ -94,7 +99,7 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item"
                                                         href="{{ route('price_proposal.show', $statement->id) }}"><i
-                                                            class="text-warning fas fa-eye"></i> @lang('back.edit')
+                                                            class="text-warning fas fa-eye"></i> @lang('back.show')
                                                     </a>
                                                     <a class="dropdown-item"
                                                         href="{{ route('price_proposal.edit', $statement->id) }}"><i
@@ -113,6 +118,7 @@
                             @endisset
                         </tbody>
                     </table>
+                    {{ $statements->links() }}
                 </div>
             </div>
         </div> <!-- end col -->
@@ -139,7 +145,35 @@
             </div>
         </div>
     </div>
-
+    <!-- The Modal -->
+    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@lang('back.whatsapp')</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('price_proposal.whatsapp') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">ارسال عرض السعر لرقم وتس اب</label>
+                            <span class="text-danger d-block">يرجى مراعه كتابه الرقم بالشكل التالى : 01xxxxxxxxx</span>
+                            <input type="text" class="form-control" id="whatsapp" name="whatsapp"
+                                placeholder="ادخل رقم العميل">
+                            <input type="hidden" class="form-control" id="proposal_id" name="proposal_id"
+                                value="{{ $statement->id }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">@lang('back.close')</button>
+                            <button type="submit" class="btn btn-primary">@lang('back.submit')</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 
