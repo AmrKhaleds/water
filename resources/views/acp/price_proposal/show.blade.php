@@ -1,215 +1,130 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@extends('acp.layout.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض سعر</title>
+@section('title')
+    @lang('back.price_proposal')
+@endsection
+
+@section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+@endsection
+@section('content')
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0">@lang('back.price_proposal')</h4>
 
-    <style>
-        @page {
-            size: A4;
-            margin: 10mm;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            justify-content: space-between;
-            overflow: scroll;
-        }
-        
-        .header {
-            display: flex;
-        }
-        
-        .header img {
-            max-width: 250px;
-            max-height: 150px;
-            margin: 10px 20px;
-        }
-        
-        .content {
-            flex: 1;
-            padding: 20mm 0;
-            border-left: 20px solid #245799;
-            margin: 0 20px;
-        }
-        
-        .title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #245799;
-            display: block;
-            margin-bottom: 20px;
-        }
-        
-        .footer {
-            padding: 10mm;
-            border-left: 20px solid #e83729;
-            text-align: left;
-            margin: 0 20px;
-            color: #24579d;
-            font-weight: bold;
-        }
-        .footer .contacts{
-            display: block;
-        }
-        
-        .fa {
-            margin-right: 10px;
-            color: #e83729;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-        
-        th,
-        td {
-            padding: 10px;
-            text-align: right;
-        }
-        
-        th {
-            background-color: #f2f2f2;
-        }
-        
-        .notes-table {
-            margin-top: 20px;
-        }
-        
-        .table-view {
-            margin-left: 20px;
-        }
-    </style>
-</head>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item active">@lang('back.price_proposal')</li>
+                        <li class="breadcrumb-item ">@lang('back.price_proposal')</li>
+                        <li class="breadcrumb-item ">@lang('back.dashborad')</li>
+                    </ol>
+                </div>
 
-<body>
-    <!-- HEADER -->
-    <div class="header">
-        <img src="{{ asset('acp/images/capital.png') }}" alt="Logo" class="logo">
-    </div>
-    <!-- CONTENT -->
-    <div class="content">
-        <div>
-            <span class="title">
-                    التاريخ / {{ Carbon\Carbon::parse($price_proposal->date)->format('d/m/Y') }}
-            </span>
-            <span class="title" style="font-size: 20px; font-weight: bold; color: #245799;">
-                    السادة / ....................................
-            </span>
-            <span class="title" style="font-size: 20px; font-weight: bold; color: #245799;">
-                    عرض اسعار سارى لمدة 15 يوم
-            </span>
-        </div>
-
-        <div class="table-view">
-            <!-- Price Proposal -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>البيان</th>
-                        <th>السعر</th>
-                    </tr>
-                </thead>
-                <tbody id="price-rows">
-                    @foreach ($statements as $statement)
-                        <tr>
-                            <td style="width: 80%">{{ $statement['statement'] }}</td>
-                            <td class="price">{{ number_format($statement['price']) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="1">الإجمالي الكلي (حروف)</th>
-                        <th id="total-price">{{ $total_price_in_arabic }}</th>
-                    </tr>
-                    <tr>
-                        <th colspan="1">الإجمالي الكلي (ارقام)</th>
-                        <th id="total-price">{{ number_format($total_price) }} جنيهًا فقط لا غير</th>
-                    </tr>
-                </tfoot>
-            </table>
-            <!-- Notes -->
-            <table class="notes-table">
-                <thead>
-                    <tr>
-                        <th>ملاحظات</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            {{ $price_proposal->notes }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
         </div>
     </div>
-    <!-- FOOTER -->
-    <div class="footer">
-        <span class="contacts">
-            010-22-767-010
-            <i class="fa fa-phone-square" aria-hidden="true"></i> 
-        </span>
-        <span class="contacts">
-            mrisuzu4@gmail.com
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-        </span>
-        <span class="contacts">
-            Egypt, Cairo, Nasr City
-            <i class="fa fa-location-arrow" aria-hidden="true"></i>
-        </span>
-        <span class="contacts">
-            www.egypt100100.com
-            <i class="fa fa-globe" aria-hidden="true"></i>
-        </span>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body" id="dvContents">
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="invoice-title">
+                                <div class="mb-4">
+                                    <img src="{{ asset('acp/images/capital.png') }}" alt="logo" height="80" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="text-muted ">
+                                <div>
+                                    <h5 class="font-size-16 mb-1">@lang('back.name') @lang('back.price_proposal') :</h5>
+                                    <p>{{ $price_proposal->name }}</p>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-size-16 mb-1">@lang('back.price_proposal') @lang('back.date') :</h5>
+                                    <p>{{ Carbon\Carbon::parse($price_proposal->date)->format('d/m/Y') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="py-2 col-lg-12">
+                        <h5 class="font-size-15 text-left">@lang('back.price_proposal')</h5>
+
+                        <div class="table-responsive">
+                            <table class="table  table-centered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 70px;">#</th>
+                                        <th>@lang('back.product')</th>
+                                        <th>@lang('back.price')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statements as $key => $statement)
+                                        <tr>
+                                            <th scope="row">{{ $key + 1 }}</th>
+                                            <td>{{ $statement['statement'] }}</td>
+                                            <td>{{ number_format($statement['price']) }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                                <tfoot style="background: rgb(215, 215, 215)">
+                                    <tr>
+                                        <th style="width:20%" class="">#</th>
+                                        <th style="width:20%" class="">@lang('back.sub_total') بالحروف</th>
+                                        <td class="">{{ $total_price_in_arabic }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:20%" class="">#</th>
+                                        <th class="">@lang('back.grand_total')</th>
+                                        <td class="">{{ number_format($total_price) }} جنيهًا فقط لا غير</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="font-size-16 mb-1">@lang('back.description') :</h5>
+                            <p>{{ $price_proposal->notes }}</p>
+                        </div>
+                        <div class="d-print-none mt-4">
+                            <div class="float-end">
+                                @php
+                                    $url = route('price_proposal.print', $price_proposal->id);
+                                @endphp
+                                <a class="btn btn-success waves-effect waves-light me-1" href="#"
+                                    onclick="printPage('{{ $url }}'); return false;"><i
+                                        class="fas fa-print" style="font-size: 25px;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Function to calculate the total price
-            function calculateTotalPrice() {
-                let total = 0;
-                document.querySelectorAll('.price').forEach(function(priceCell) {
-                    total += parseFloat(priceCell.textContent) || 0;
-                });
-                document.getElementById('total-price').textContent = total.toFixed(2);
-                return total;
-            }
-    
-            // Calculate the total price on page load
-            let total = calculateTotalPrice();
-            
-            // Send the total to the backend to get the Arabic words
-            $.ajax({
-                url: '{{ route("price_proposal.arabic_price") }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    total: total
-                },
-                success: function(response) {
-                    // Display the converted total
-                    $('#total-price').text(response.convertedTotal);
-                }
-            });
-        });
-    </script> --}}
-</body>
-</html>
+    <!-- end row -->
+@endsection
+@section('js')
+    <script>
+        function printPage(url) {
+            var printWindow = window.open(url, '_blank', 'height=500,width=800');
+            printWindow.onload = function() {
+                printWindow.focus();
+                printWindow.print();
+                printWindow.onafterprint = function() {
+                    printWindow.close();
+                };
+            };
+        }
+    </script>
+@endsection

@@ -75,7 +75,7 @@
                                         </td>
                                         <td>
                                             @php
-                                                $url = route('price_proposal.show', $statement->id);
+                                                $url = route('price_proposal.print', $statement->id);
                                             @endphp
                                             <a class="dropdown-item" href="#"
                                                 onclick="printPage('{{ $url }}'); return false;"><i

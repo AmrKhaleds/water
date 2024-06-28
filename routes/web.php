@@ -127,6 +127,7 @@ Route::group(
                 Route::get('/price-proposal', [PriceProposalController::class, 'index'])->name('price_proposal.index');
                 Route::get('/price-proposal/create', [PriceProposalController::class, 'create'])->name('price_proposal.create');
                 Route::get('/price-proposal/show/{id}', [PriceProposalController::class, 'show'])->name('price_proposal.show');
+                Route::get('/price-proposal/print/{id}', [PriceProposalController::class, 'print'])->name('price_proposal.print');
                 Route::post('/price-proposal/store', [PriceProposalController::class, 'store'])->name('price_proposal.store');
                 Route::post('/price-proposal/whatsapp', [PriceProposalController::class, 'whatsapp'])->name('price_proposal.whatsapp');
                 Route::get('/price-proposal/edit/{id}', [PriceProposalController::class, 'edit'])->name('price_proposal.edit');

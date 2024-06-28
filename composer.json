@@ -7,7 +7,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "alkoumi/laravel-arabic-numbers": "^1.1",
-        "barryvdh/laravel-snappy": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -15,6 +14,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "mpdf/mpdf": "^8.2",
         "symfony/symfony": "5.4.x"
     },
     "require-dev": {

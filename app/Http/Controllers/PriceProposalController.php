@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Alkoumi\LaravelArabicNumbers\Numbers;
 use App\Models\PriceProposal;
-use Barryvdh\Snappy\Facades\SnappyPdf;
 use Faker\Core\Number;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Knp\Snappy\Pdf;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 
 class PriceProposalController extends Controller
 {
@@ -72,14 +72,12 @@ class PriceProposalController extends Controller
         $pdfData = [
             'statements' => $data,
             'price_proposal' => $priceProposal,
+            'total_price' => $totalPrice,
             'total_price_in_arabic' => $totalPriceInArabic,
         ];
 
         // Generate and save the PDF
-        $pdf = SnappyPdf::loadView('acp.price_proposal.show', $pdfData)
-            ->setPaper('a4')
-            ->setOrientation('portrait')
-            ->setOption('margin-bottom', 0);
+        $pdf = LaravelMpdf::loadView('acp.price_proposal.show', $pdfData);
         $pdf->save('uploads/price-proposal/' . $priceProposal->id . '.pdf');
 
         // Redirect or return a response
@@ -144,7 +142,7 @@ class PriceProposalController extends Controller
         ];
 
         // Generate and save the new PDF
-        $pdf = SnappyPdf::loadView('acp.price_proposal.show', $pdfData)
+        $pdf = LaravelMpdf::loadView('acp.price_proposal.show', $pdfData)
             ->setPaper('a4')
             ->setOrientation('portrait')
             ->setOption('margin-bottom', 0);
@@ -177,5 +175,17 @@ class PriceProposalController extends Controller
 
         $whatsappUrl = 'https://wa.me/+2' . $request->whatsapp . '?text=' . $encodedMessage;
         return view('acp.price_proposal.whatsapp', ['url' => $whatsappUrl]);
+    }
+
+    public function print($id)
+    {
+        $price_proposal = PriceProposal::findOrFail($id);
+        $statements = json_decode($price_proposal->statements, true);
+
+        $statements_collection = collect($statements);
+        $total_price = $statements_collection->sum('price');
+        $total_price_in_arabic = Numbers::tafqeetMoney($total_price, 'EGP');
+
+        return view('acp.price_proposal.print', compact('statements', 'price_proposal', 'total_price', 'total_price_in_arabic'));
     }
 }
