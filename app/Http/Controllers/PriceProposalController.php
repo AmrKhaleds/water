@@ -142,10 +142,7 @@ class PriceProposalController extends Controller
         ];
 
         // Generate and save the new PDF
-        $pdf = LaravelMpdf::loadView('acp.price_proposal.show', $pdfData)
-            ->setPaper('a4')
-            ->setOrientation('portrait')
-            ->setOption('margin-bottom', 0);
+        $pdf = LaravelMpdf::loadView('acp.price_proposal.show', $pdfData);
         $pdf->save($pdfPath);
 
         // Redirect or return a response
