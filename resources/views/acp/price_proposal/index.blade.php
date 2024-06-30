@@ -162,7 +162,7 @@
                             <input type="text" class="form-control" id="whatsapp" name="whatsapp"
                                 placeholder="ادخل رقم العميل">
                             <input type="hidden" class="form-control" id="proposal_id" name="proposal_id"
-                                value="{{ $statement->id }}">
+                                value="{{ isset($statement->id) }}">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
