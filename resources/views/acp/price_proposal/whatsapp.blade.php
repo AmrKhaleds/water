@@ -42,7 +42,7 @@
                 // Open the URL in a new tab after 3 seconds
                 window.open("{{ $url }}", "_blank");
                 // Redirect the current tab to a different page
-                // window.location.href = "{{ url('/acp/price-proposal') }}";
+                window.location.href = "{{ url('/acp/price-proposal') }}";
             }, 5000); // 3-second delay
         });
     </script>
