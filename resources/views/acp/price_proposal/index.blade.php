@@ -69,7 +69,7 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>
                                             <a class="dropdown-item" href="#" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#whatsappModal" data-id="{{ $statement->id }}">
+                                                data-bs-target="#proposal-id" data-id="{{ $statement->id }}">
                                                 <i class="uil uil-whatsapp-alt" style="font-size: 30px; color: green"></i>
                                             </a>
                                         </td>
@@ -146,7 +146,7 @@
         </div>
     </div>
     <!-- The Modal -->
-    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="proposal-id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -162,7 +162,7 @@
                             <input type="text" class="form-control" id="whatsapp" name="whatsapp"
                                 placeholder="ادخل رقم العميل">
                             <input type="hidden" class="form-control" id="proposal_id" name="proposal_id"
-                                value="{{ isset($statement->id) }}">
+                                value="">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
@@ -190,6 +190,19 @@
                 var action = "{{ route('price_proposal.destroy', '') }}/" + saleId;
                 var form = document.getElementById('deleteForm');
                 form.action = action;
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var proposalModal = document.getElementById('proposal-id');
+
+            proposalModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var proposalId = button.getAttribute('data-id');
+                var modalInput = proposalModal.querySelector('#proposal_id');
+                modalInput.value = proposalId;
             });
         });
     </script>
