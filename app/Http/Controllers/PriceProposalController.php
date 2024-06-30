@@ -77,7 +77,7 @@ class PriceProposalController extends Controller
         ];
 
         // Generate and save the PDF
-        $pdf = LaravelMpdf::loadView('acp.price_proposal.show', $pdfData);
+        $pdf = LaravelMpdf::loadView('acp.price_proposal.print', $pdfData);
         $pdf->save('uploads/price-proposal/' . $priceProposal->id . '.pdf');
 
         // Redirect or return a response
@@ -142,7 +142,7 @@ class PriceProposalController extends Controller
         ];
 
         // Generate and save the new PDF
-        $pdf = LaravelMpdf::loadView('acp.price_proposal.show', $pdfData);
+        $pdf = LaravelMpdf::loadView('acp.price_proposal.print', $pdfData);
         $pdf->save($pdfPath);
 
         // Redirect or return a response
